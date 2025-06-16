@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAI SMART AI: Empowering Farmers Unlocked</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #4CAF50; /* Vibrant Green */
+            --dark-green: #388E3C; /* Darker Green */
+            --light-green: #E8F5E9; /* Very Light Green */
+            --earth-brown: #795548; /* Earthy Brown */
+            --light-brown: #D7CCC8; /* Light Brown */
+            --sky-blue: #2196F3; /* Sky Blue */
+            --light-blue: #BBDEFB; /* Light Blue */
+            --accent-orange: #FF9800; /* Warm Orange */
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark: #2c3e50;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-green);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+      .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+      .card {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+      .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+      .card h2 {
+            color: var(--dark-green);
+            font-family: 'Merriweather', serif;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+      .card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+      .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+      .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+      .button {
+            background-color: var(--sky-blue);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+      .button:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* Specific styles for Crop Health */
+        #crop-health-section.upload-status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark-green);
+            display: none;
+        }
+
+        #crop-health-section.diagnosis-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            display: none; /* Hidden by default */
+        }
+
+        #crop-health-section.diagnosis-result.healthy {
+            background-color: var(--light-green);
+            border: 1px solid var(--primary-green);
+            color: var(--dark-green);
+        }
+
+        #crop-health-section.diagnosis-result.diseased {
+            background-color: #FFEBEE; /* Light Red */
+            border: 1px solid #F44336; /* Red */
+            color: #D32F2F; /* Dark Red */
+        }
+
+        #crop-health-section.diagnosis-result h3 {
+            margin-top: 0;
+            color: inherit;
+        }
+
+        #crop-health-section.diagnosis-result ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        /* Specific styles for Climate Advisory */
+        #climate-advisory-section.forecast-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        #climate-advisory-section.forecast-table th,
+        #climate-advisory-section.forecast-table td {
+            border: 1px solid var(--light-brown);
+            padding: 8px;
+            text-align: center;
+        }
+
+        #climate-advisory-section.forecast-table th {
+            background-color: var(--light-blue);
+            color: var(--text-dark);
+        }
+
+        #climate-advisory-section.advisory-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            text-align: left;
+            display: none; /* Hidden by default */
+        }
+
+        /* Specific styles for Market Intelligence */
+        #market-intelligence-section.price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        #market-intelligence-section.price-table th,
+        #market-intelligence-section.price-table td {
+            border: 1px solid var(--light-brown);
+            padding: 8px;
+            text-align: center;
+        }
+
+        #market-intelligence-section.price-table th {
+            background-color: var(--accent-orange);
+            color: var(--text-light);
+        }
+
+        #market-intelligence-section.connect-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--light-green);
+            border-radius: 8px;
+            text-align: center;
+            display: none; /* Hidden by default */
+            color: var(--dark-green);
+            font-weight: 600;
+        }
+
+        /* Specific styles for Chatbot */
+        #chatbot-section {
+            grid-column: span 2; /* Make chatbot span two columns on larger screens */
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 600px; /* Fixed height for chat window */
+        }
+
+        #chat-window {
+            flex-grow: 1;
+            border: 1px solid var(--light-brown);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            background-color: var(--light-green);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+      .message {
+            max-width: 80%;
+            padding: 0.6rem 1rem;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+
+      .user-message {
+            align-self: flex-end;
+            background-color: var(--sky-blue);
+            color: var(--text-light);
+            border-bottom-right-radius: 5px;
+        }
+
+      .bot-message {
+            align-self: flex-start;
+            background-color: var(--light-blue);
+            color: var(--text-dark);
+            border-bottom-left-radius: 5px;
+        }
+
+        #chat-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--light-brown);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        #send-chat {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        #send-chat:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* Educational Content Section */
+      .educational-content {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            grid-column: span 2; /* Span two columns */
+        }
+
+      .educational-content h2 {
+            color: var(--dark-green);
+            font-family: 'Merriweather', serif;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+      .educational-content.topic {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--light-green);
+            border-left: 5px solid var(--primary-green);
+            border-radius: 8px;
+        }
+
+      .educational-content.topic h3 {
+            color: var(--earth-brown);
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+      .educational-content.topic p {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+      .educational-content.topic a {
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+      .educational-content.topic a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            color: var(--text-light);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .container {
+                grid-template-columns: 1fr;
+            }
+            #chatbot-section,.educational-content {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌱 CHAI SMART AI: Empowering Farmers Unlocked</h1>
+        <p>Intelligent Solutions for a Thriving Tea Sector</p>
+    </header>
+
+    <div class="container">
+        <div class="card" id="crop-health-section">
+            <div class="card-content">
+                <div class="icon">🌿</div>
+                <h2>Crop Health & Yield Insights</h2>
+                <p>Upload a photo of your tea leaf for instant disease diagnosis and get personalized yield predictions for your farm.</p>
+                <img src="farm view.jpg" alt="Healthy Tea Farm View" style="margin-top: 1rem;">
+                <input type="file" id="leaf-photo-upload" accept="image/*" style="display: none;">
+                <button class="button" onclick="document.getElementById('leaf-photo-upload').click();">Upload Leaf Photo</button>
+                <div class="upload-status" id="upload-status"></div>
+                <button class="button" id="diagnose-button" style="display: none;">Diagnose</button>
+                <div class="diagnosis-result" id="diagnosis-result"></div>
+                <p style="margin-top: 1rem; font-weight: 600;">Predicted Yield: <span style="color: var(--primary-green);">2500 Kg/Hectare (Next Season)</span></p>
+            </div>
+            <div class="card-footer">
+                <p style="font-size: 0.85rem; color: #777;"><i>"Early detection saves your harvest!"</i></p>
+            </div>
+        </div>
+
+        <div class="card" id="climate-advisory-section">
+            <div class="card-content">
+                <div class="icon">☀️</div>
+                <h2>Climate-Smart Advisory</h2>
+                <p>Receive localized weather forecasts and tailored advice to adapt to changing climate patterns.</p>
+                <img src="weather.jpg" alt="Weather Forecast Illustration" style="margin-top: 1rem;">
+                <table class="forecast-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Temp (°C)</th>
+                            <th>Rain (mm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Today</td><td>25°C</td><td>0</td></tr>
+                        <tr><td>Tomorrow</td><td>26°C</td><td>5</td></tr>
+                        <tr><td>Day 3</td><td>24°C</td><td>15</td></tr>
+                    </tbody>
+                </table>
+                <button class="button" id="get-advisory-button">Get Personalized Advisory</button>
+                <div class="advisory-message" id="advisory-message"></div>
+            </div>
+            <div class="card-footer">
+                <p style="font-size: 0.85rem; color: #777;"><i>"Plan smart, grow strong!"</i></p>
+            </div>
+        </div>
+
+        <div class="card" id="market-intelligence-section">
+            <div class="card-content">
+                <div class="icon">📈</div>
+                <h2>Market Intelligence</h2>
+                <p>Access real-time tea prices, market trends, and connect directly with buyers for better returns.</p>
+                <img src="tea market.jpg" alt="Tea Market Scene" style="margin-top: 1rem;">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Tea Grade</th>
+                            <th>Price (Ksh/Kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CTC PF1</td><td>280</td></tr>
+                        <tr><td>Orthodox</td><td>450</td></tr>
+                        <tr><td>Purple Tea</td><td>600</td></tr>
+                    </tbody>
+                </table>
+                <button class="button" id="connect-buyers-button">Connect with Buyers</button>
+                <div class="connect-message" id="connect-message"></div>
+            </div>
+            <div class="card-footer">
+                <p style="font-size: 0.85rem; color: #777;"><i>"Your tea, your price!"</i></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <div class="icon">📚</div>
+                <h2>Educational Resources</h2>
+                <p>Learn best practices for tea cultivation, pest management, and sustainable farming.</p>
+                <div class="topic">
+                    <h3>Tip: Drought-Tolerant Varieties</h3>
+                    <p>Consider planting drought-tolerant tea varieties like TRFK 306 or TRFK 303. These clones are developed by the Tea Research Foundation of Kenya and can significantly improve your farm's resilience to erratic rainfall and prolonged dry spells, ensuring consistent yields even in challenging climates. <a href="https://cdkn.org/sites/default/files/files/Kenya-Tea-Development-Agency.pdf" target="_blank">Learn more about KTDA's climate initiatives</a>. [1]</p>
+                </div>
+                <div class="topic">
+                    <h3>Tip: Soil Health & Fertilizers</h3>
+                    <p>Regular soil testing helps you understand nutrient levels and pH. This allows for precise fertilizer application, reducing waste and improving soil fertility. Healthy soil leads to healthier tea bushes and better yields! <a href="https://geopard.tech/blog/kenya-to-embrace-ai-and-satellite-crop-monitoring-for-farmers/" target="_blank">Discover AI & Satellite Crop Monitoring in Kenya</a>. [2]</p>
+                </div>
+                <div class="topic">
+                    <h3>Tip: Direct Sales & Value Addition</h3>
+                    <p>New policies allow direct tea sales to international markets, bypassing traditional auctions. This means better profit margins for you! Explore local packaging and branding to add more value to your tea. <a href="https://www.kenyans.co.ke/news/111659-govt-moves-license-tea-factories-direct-international-sales" target="_blank">Read about direct sales reforms</a>. [3]</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p style="font-size: 0.85rem; color: #777;"><i>"Knowledge grows, so does your farm!"</i></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 0;">
+        <div id="chatbot-section">
+            <h2>🧑‍🌾 CHAI SMART AI Chatbot</h2>
+            <div id="chat-window">
+                <div class="bot-message">Jambo, farmer! I'm your CHAI SMART AI assistant. I'm here to help you with your tea farm. What's on your mind today?</div>
+            </div>
+            <div id="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Ask me anything about tea farming...">
+                <button id="send-chat">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CHAI SMART AI. All rights reserved. Empowering Kenyan Farmers for a Sustainable Future.</p>
+        <p>This is a simulated MVP for demonstration purposes only. For real-time data and services, sit back and relax while I handle the heavy computation!</p>
+        <p>Learn more about <a href="https://www.un.org/sustainabledevelopment/" target="_blank">UN Sustainable Development Goals</a>.</p>
+    </footer>
+
+    <script>
+        // --- Crop Health Section Logic ---
+        const leafPhotoUpload = document.getElementById('leaf-photo-upload');
+        const diagnoseButton = document.getElementById('diagnose-button');
+        const diagnosisResult = document.getElementById('diagnosis-result');
+        const uploadStatus = document.getElementById('upload-status');
+
+        leafPhotoUpload.addEventListener('change', function() {
+            if (this.files && this.files) { // Check if a file is selected
+                const fileName = this.files.name; // Correctly access file name
+                uploadStatus.textContent = `File selected: ${fileName}. Click 'Diagnose' to proceed.`;
+                uploadStatus.style.display = 'block';
+                diagnoseButton.style.display = 'inline-block'; // Show diagnose button
+                diagnosisResult.style.display = 'none'; // Hide previous result
+            } else {
+                uploadStatus.style.display = 'none';
+                diagnoseButton.style.display = 'none';
+            }
+        });
+
+        diagnoseButton.addEventListener('click', function() {
+            uploadStatus.textContent = 'Analyzing photo... Please wait.';
+            uploadStatus.style.color = 'var(--accent-orange)';
+            this.disabled = true; // Disable button during "diagnosis"
+
+            setTimeout(() => {
+                // Simulate AI diagnosis
+                const randomDiagnosis = Math.random();
+                if (randomDiagnosis < 0.7) { // 70% chance of healthy
+                    diagnosisResult.className = 'diagnosis-result healthy';
+                    diagnosisResult.innerHTML = `
+                        <h3>Diagnosis: Healthy Tea Leaf! ✅</h3>
+                        <p>Your tea leaf appears healthy and thriving. Keep up the good work!</p>
+                        <h4>Educational Tip:</h4>
+                        <p>Regular monitoring helps prevent diseases. Continue to inspect your plants for any early signs of stress or discoloration. For more insights on crop monitoring, visit <a href="https://blogs.worldbank.org/en/agfood/artificial-interlligence-in-the-future-of-sub-saharan-africa-far" target="_blank">World Bank's AI in Agriculture</a>. [4]</p>
+                    `;
+                } else {
+                    diagnosisResult.className = 'diagnosis-result diseased';
+                    diagnosisResult.innerHTML = `
+                        <h3>Diagnosis: Early Blight Detected! 🔴</h3>
+                        <p>Based on the image, your tea leaf shows early signs of blight. Prompt action is crucial to prevent spread and protect your yield.</p>
+                        <h4>Recommended Action:</h4>
+                        <ul type="square">
+                            <li>Apply a recommended organic fungicide (e.g., Neem oil solution) within 24 hours.</li>
+                            <li>Ensure proper air circulation around plants by light pruning.</li>
+                            <li>Monitor affected plants daily for improvement.</li>
+                        </ul>
+                        <p>For detailed pest and disease management strategies, consult the <a href="https://www.researchgate.net/publication/389397814_Plant_Disease_Detection_Using_Hybrid_MobileNetV2-_Compact_CNN_Architecture_with_LIME_Integration" target="_blank">latest research on plant disease detection</a>. [5]</p>
+                    `;
+                }
+                diagnosisResult.style.display = 'block';
+                uploadStatus.style.display = 'none'; // Hide status message
+                this.style.display = 'none'; // Hide diagnose button after showing result
+                this.disabled = false; // Re-enable button if it were to be shown again
+            }, 2000); // Simulate 2-second processing time
+        });
+
+        // --- Climate Advisory Section Logic ---
+        const getAdvisoryButton = document.getElementById('get-advisory-button');
+        const advisoryMessage = document.getElementById('advisory-message');
+
+        getAdvisoryButton.addEventListener('click', function() {
+            advisoryMessage.innerHTML = `
+                <h3>Personalized Climate Advisory:</h3>
+                <p>Based on the forecast, expect moderate rainfall in the next 3 days. Ensure your drainage systems are clear to prevent waterlogging. Consider light mulching to retain soil moisture during dry spells that may follow. [6]</p>
+                <p>Remember, adapting to climate change is key for consistent yields. Our AI helps you plan ahead! For more on climate-smart agriculture, check out <a href="https://www.fao.org/kenya/news/detail-events/fr/c/1736581/" target="_blank">FAO's initiatives in Kenya</a>. [7]</p>
+            `;
+            advisoryMessage.style.display = 'block';
+        });
+
+        // --- Market Intelligence Section Logic ---
+        const connectBuyersButton = document.getElementById('connect-buyers-button');
+        const connectMessage = document.getElementById('connect-message');
+
+        connectBuyersButton.addEventListener('click', function() {
+            connectMessage.innerHTML = `
+                <p>Connecting you with pre-vetted international buyers... You will receive a notification with potential matches shortly!</p>
+                <p><i>"Recent policy reforms allow direct sales, empowering you to earn more!"</i> <a href="https://www.kenyans.co.ke/news/111659-govt-moves-license-tea-factories-direct-international-sales" target="_blank">Read about direct sales reforms</a>. [3]</p>
+            `;
+            connectMessage.style.display = 'block';
+        });
+
+        // --- Chatbot Logic ---
+        const chatInput = document.getElementById('chat-input');
+        const sendChatButton = document.getElementById('send-chat');
+        const chatWindow = document.getElementById('chat-window');
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', `${sender}-message`);
+            messageDiv.textContent = text;
+            chatWindow.appendChild(messageDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to bottom
+        }
+
+        function getBotResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+if (msg.includes('hello') ||
+    msg.includes('hi') ||
+    msg.includes('jambo')) {
+    return "Jambo! I'm your CHAI SMART AI assistant. How can I help you with your tea farm today?";
+} else if (msg.includes('disease') ||
+    msg.includes('pest') ||
+    msg.includes('sick')) {
+    return "For disease or pest issues, please use our 'Crop Health & Yield Insights' tool to upload a leaf photo for instant diagnosis. I can then provide general advice. Early detection is key! [4]";
+} else if (msg.includes('fertilizer') ||
+    msg.includes('soil') ||
+    msg.includes('nutrients')) {
+    return "Optimizing fertilizer use is crucial! Have you done a soil test recently? Knowing your soil's pH and nutrient levels helps apply the right amount, reducing waste and boosting yield. [2]";
+} else if (msg.includes('weather') ||
+    msg.includes('rain') ||
+    msg.includes('climate')) {
+    return "Our 'Climate-Smart Advisory' provides localized forecasts. Planning your activities around weather helps prevent losses. What specific weather concern do you have? [6]";
+} else if (msg.includes('price') ||
+    msg.includes('sell') ||
+    msg.includes('market')) {
+    return "Our 'Market Intelligence' section shows current tea prices and connects you directly with buyers. Direct sales can significantly improve your profit margins! [3]";
+} else if (msg.includes('yield') ||
+    msg.includes('harvest')) {
+    return "Yield prediction is complex! Our AI considers weather, soil, and historical data to give you an estimate. Consistent good practices are key to high yields. [8]";
+} else if (msg.includes('ktda')) {
+    return "KTDA provides crucial services like agri-extension, processing, and marketing support for smallholder farmers. They are also implementing reforms to modernize operations and improve transparency. [9]";
+} else if (msg.includes('training') ||
+    msg.includes('learn')) {
+    return "We offer educational resources right here on the page! You can find tips on drought-tolerant varieties, soil health, and direct sales. Continuous learning helps your farm thrive. [6]";
+} else if (msg.includes('thank you') ||
+    msg.includes('thanks')) {
+    return "You're most welcome! Is there anything else I can help you with?";
+} else if (msg.includes('bye') ||
+    msg.includes('goodbye')) {
+    return "Goodbye! Happy farming! Remember, CHAI SMART AI is always here to help.";
+} else {
+    return "I'm still learning! Could you please rephrase your question or ask about crop health, weather, market prices, or general tea farming tips?";
+}
+        }
+
+        sendChatButton.addEventListener('click', function() {
+            const userMessage = chatInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, 'user');
+                chatInput.value = '';
+                setTimeout(() => {
+                    addMessage(getBotResponse(userMessage), 'bot');
+                }, 1000); // Simulate typing delay
+            }
+        });
+
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
